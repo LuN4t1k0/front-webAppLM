@@ -1,50 +1,90 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 export const FormUser = () => {
+  const schema = yup.object({
+    rut: yup.string()
+      .required()
+      .matches(/^(\d{2}\.\d{3}\.\d{3}-)([a-zA-Z]{1}$|\d{1}$)/, 'No es el formato'),
+    password:yup.string().required()
+  }).required();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(schema)
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
-    <div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-  <div class="w-full max-w-md space-y-8">
-    <div>
-      <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company"/>
-      <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Licencias Medicas</h2>
+    <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <img
+          className="mx-auto h-12 w-auto"
+          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+          alt="Your Company"
+        />
+        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Licencias Médicas</h2>
+      </div>
 
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-6 min-w-[250px]"
+          >
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 text-left">
+                Rut
+              </label>
+              <div className="mt-2">
+                <input
+                  {...register("rut", { required: true })}
+                  placeholder="Ejemplo 11.111.111-1"
+                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+              { errors.rut && (
+                <p className="mt-2 text-sm text-red-400 text-left font-medium" >
+                  Este campo es requerido
+                </p>
+              )}
+            </div>
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900 text-left">
+                Contraseña
+              </label>
+              <div className="mt-2">
+                <input
+                  {...register("password", { required: true })}
+                  placeholder="Ingresa tu contraseña"
+                  className="block w-full rounded-md border-0 py-1.5 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+              { errors.password && (
+                <p className="mt-2 text-sm text-red-400 text-left font-medium" >
+                  Este campo es requerido
+                </p>
+              )}
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Ingresar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <form class="mt-8 space-y-6" action="#" method="POST">
-      <input type="hidden" name="remember" value="true"/>
-      <div class="-space-y-px rounded-md shadow-sm">
-        <div>
-          <label for="email-address" class="sr-only ">Ingresa tu RUT</label>
-          <input id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email address"/>
-        </div>
-        <div>
-          <label for="password" class="sr-only">Ingresa tu contraseña</label>
-          <input id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Password"/>
-        </div>
-      </div>
-
-      <div class="flex items-center justify-between">
-        <div class="flex items-center">
-          <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"/>
-          <label for="remember-me" class="ml-2 block text-sm text-gray-900">Recuerdame</label>
-        </div>
-
-        <div class="text-sm">
-          <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Recuperar tu password</a>
-        </div>
-      </div>
-
-      <div>
-        <button type="submit" class="group relative flex w-full justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-            <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
-            </svg>
-          </span>
-          Sign in
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
   );
 };
