@@ -19,7 +19,7 @@ const navigate = useNavigate();
   
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigation = [
-    { name: 'Dashboard', href: 'dashboard', icon: HomeIcon, current: false },
+    { name: 'Mis licencias', href: 'licenses', icon: HomeIcon, current: false },
     { name: 'Perfil', href: 'perfil', icon: UsersIcon, current: false },
     { name: 'Projects', href: '#', icon: FolderIcon, current: false },
     { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
