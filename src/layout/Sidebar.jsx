@@ -9,22 +9,27 @@ import {
   InboxIcon,
   UsersIcon,
   XMarkIcon,
-} from '@heroicons/react/24/outline'
+} from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom';
+import classNames from '../utils/ClassNames';
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 export default function Sidebar() {
+
+const navigate = useNavigate();
   
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigation = [
-    { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-    { name: 'Team', href: '#', icon: UsersIcon, current: false },
+    { name: 'Dashboard', href: 'dashboard', icon: HomeIcon, current: false },
+    { name: 'Perfil', href: 'perfil', icon: UsersIcon, current: false },
     { name: 'Projects', href: '#', icon: FolderIcon, current: false },
     { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
     { name: 'Documents', href: '#', icon: InboxIcon, current: false },
     { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
   ]
+
+  const nav = (path) => {
+    navigate(`/${path}`);
+  }
   return(
     <>
     <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -84,13 +89,14 @@ export default function Sidebar() {
                     {navigation.map((item) => (
                       <a
                         key={item.name}
-                        href={item.href}
+                        //href={item.href}
                         className={classNames(
                           item.current
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                           'group flex items-center rounded-md px-2 py-2 text-base font-medium'
                         )}
+                        onClick={()=> nav(item.href)}
                       >
                         <item.icon
                           className={classNames(
