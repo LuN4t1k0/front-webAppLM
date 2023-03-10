@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { useNavigate } from 'react-router-dom';
 
 export const FormUser = () => {
   const schema = yup.object({
@@ -18,13 +19,23 @@ export const FormUser = () => {
   } = useForm({
     resolver: yupResolver(schema)
   });
-
+  const navigate = useNavigate();
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+  
   const onSubmit = (data) => {
     console.log(data);
+    login(data)
   };
 
+  const login = (data) => {
+    if(data.rut === '11.111.111-1' && data.password === "123456"){
+      localStorage.setItem("token", token);
+      navigate('/licenses');
+    }
+  }
+
   return (
-    <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-full h-screen flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <img
           className="mx-auto h-12 w-auto"
