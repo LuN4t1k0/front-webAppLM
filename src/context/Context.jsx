@@ -22,10 +22,12 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     getInfo();
   }, [])
+
+  
   
 
   return (
-    <Context.Provider value={ user }>
+    <Context.Provider value={user}>
         {children}
     </Context.Provider>
   );
