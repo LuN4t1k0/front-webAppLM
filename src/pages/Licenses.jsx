@@ -17,10 +17,24 @@ export default function Licenses() {
     setIsOpen(true);
   }
 
+  const renderTitle = () => {
+    if(user?.usuario?.tipo_rol === 'usuario') {
+      return(
+        <h1 className="text-2xl font-semibold text-gray-900">Mis licencias</h1>
+      )
+    } if(user?.usuario?.tipo_rol === 'rrhh') {
+      return(
+        <h1 className="text-2xl font-semibold text-gray-900">Listado de licencias</h1>
+      )
+    } else {
+      return null
+    }
+  }
+
   return (
     <div className="py-6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h1 className="text-2xl font-semibold text-gray-900">Mis Licencias</h1>
+        { user && renderTitle()}
       </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="px-4 sm:px-6 lg:px-8">

@@ -3,8 +3,6 @@ import Context from "../context/Context";
 
 export default function Perfil() {
   const user = useContext(Context);
-  console.log(user);
-
 
   return (
     <div className="py-6">

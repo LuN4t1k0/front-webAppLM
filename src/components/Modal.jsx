@@ -4,7 +4,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import FormatDate from "../hooks/FormatDate";
 
 export default function Modal({ isOpen, closeModal, modalData }) {
-  console.log(modalData)
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
