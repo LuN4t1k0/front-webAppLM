@@ -1,10 +1,13 @@
-import { useContext } from "react";
+
+import React, { useState, useContext } from "react";
 import Context from "../context/Context";
+import Modals from "../components/Modals";
 
 export default function Licenses() {
-
   const user = useContext(Context);
-
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <div className="py-6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -16,7 +19,10 @@ export default function Licenses() {
             <table className="min-w-full divide-y divide-gray-300">
               <thead>
                 <tr>
-                  <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                  >
                     Folio
                   </th>
                   <th
@@ -43,7 +49,10 @@ export default function Licenses() {
                   >
                     Días
                   </th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
                     Estado
                   </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
@@ -70,9 +79,14 @@ export default function Licenses() {
                       {licencia.cantidad_dias}
                     </td>
 
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{licencia.estado}</td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      {licencia.estado}
+                    </td>
                     <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <button>Ver más</button>
+                      <button onClick={handleShow}>
+                        Ver más
+                      </button>
+                      <Modals show={show} handleClose={handleClose}/>
                     </td>
                   </tr>
                 ))}
@@ -82,5 +96,5 @@ export default function Licenses() {
         </div>
       </div>
     </div>
-  )
+  );
 }
