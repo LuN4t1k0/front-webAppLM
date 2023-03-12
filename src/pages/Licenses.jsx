@@ -1,13 +1,22 @@
 
 import React, { useState, useContext } from "react";
 import Context from "../context/Context";
-import Modals from "../components/Modals";
+import Modal from "../components/Modal";
+import FormatDate from "../hooks/FormatDate";
 
 export default function Licenses() {
   const user = useContext(Context);
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalData, setModalData] = useState(null)
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
   return (
     <div className="py-6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -70,10 +79,10 @@ export default function Licenses() {
                       {licencia.tipo_licencia}
                     </td>
                     <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                      {licencia.fecha_inicio}
+                      {FormatDate(licencia.fecha_inicio)}
                     </td>
                     <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                      {licencia.fecha_termino}
+                      {FormatDate(licencia.fecha_termino)}
                     </td>
                     <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
                       {licencia.cantidad_dias}
@@ -83,10 +92,12 @@ export default function Licenses() {
                       {licencia.estado}
                     </td>
                     <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <button onClick={handleShow}>
+                      <button
+                        onClick={()=>{openModal(true),setModalData(licencia)}}
+                      >
                         Ver más
                       </button>
-                      <Modals show={show} handleClose={handleClose}/>
+                    <Modal isOpen={isOpen} closeModal={closeModal} modalData={modalData}/>
                     </td>
                   </tr>
                 ))}
