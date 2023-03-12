@@ -4,7 +4,6 @@ import Sidebar from "../layout/Sidebar";
 
 export default function PrivateRoutes() {
   const auth = useAuth();
-  console.log(auth);
 
   return(
     <>{auth ? (<>
