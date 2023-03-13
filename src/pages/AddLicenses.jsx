@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Navigate } from "react-router-dom";
 import Context from "../context/Context";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -37,7 +38,7 @@ export default function AddLicenses() {
 
   return (
     <>
-      {user?.usuario?.tipo_rol && (
+      {user?.usuario?.tipo_rol === 'rrhh' ? (
         <div className="py-6">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h1 className="text-2xl font-semibold text-gray-900">Agregar licencia</h1>
@@ -257,7 +258,7 @@ export default function AddLicenses() {
             </div>
           </div>
         </div>
-      )}
+      ): <Navigate to="/licenses"/>}
     </>
   );
 }

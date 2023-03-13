@@ -5,11 +5,12 @@ const Context = createContext(null);
 
 const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  console.log(user);
   
   async function getInfo() {
     const token = localStorage.getItem("token");
     try {
-      const res = await axios.get("https://run.mocky.io/v3/b9d69ed6-9eba-45bd-acf9-89e565f808a8", {
+      const res = await axios.get("https://run.mocky.io/v3/64c6597d-c467-44d8-8966-e0cc44f1b03e", {
         headers: {Authorization: "Bearer" + token}
       });
       const { data } = await res;

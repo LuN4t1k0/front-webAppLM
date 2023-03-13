@@ -30,7 +30,7 @@ export default function Sidebar() {
   }
 
   const renderList = () => {
-    if (user?.usuario?.tipo_rol === 'usuario') {
+    if (user?.usuario?.tipo_rol === 'basico') {
       return (
         <>
           {navigationUser.map((item) => (

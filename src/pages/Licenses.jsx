@@ -10,7 +10,7 @@ export default function Licenses() {
 
   const renderTitle = () => {
     switch (user?.usuario?.tipo_rol) {
-      case 'usuario':
+      case 'basico':
         return (<h1 className="text-2xl font-semibold text-gray-900">Mis licencias</h1>)
       case 'rrhh':
         return (<h1 className="text-2xl font-semibold text-gray-900">Listado de licencias</h1>)
@@ -19,7 +19,7 @@ export default function Licenses() {
 
   const renderTable = () => {
     switch (user?.usuario?.tipo_rol) {
-      case 'usuario':
+      case 'basico':
         return (<UserTable/>)
       case 'rrhh':
         return (<RrhhUserTable/>)
