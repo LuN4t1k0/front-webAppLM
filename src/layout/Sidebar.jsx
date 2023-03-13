@@ -1,18 +1,12 @@
 import { Fragment, useState, useContext } from 'react';
 import Context from '../context/Context';
 import { Dialog, Transition } from '@headlessui/react';
-import {
-  Bars3Icon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  UsersIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 import classNames from '../utils/ClassNames';
+import { UsersIcon } from '../components/icons/UsersIcon';
+import { DocumentTextIcon } from '../components/icons/DocumentTextIcon';
+import { XMarkIcon } from '../components/icons/XMarkIcon';
+import { Bars3Icon } from '../components/icons/Bars3Icon';
 
 export default function Sidebar() {
 
@@ -21,12 +15,13 @@ export default function Sidebar() {
   const user = useContext(Context);
 
   const navigationUser = [
-    { name: 'Mis licencias', href: 'licenses', icon: HomeIcon, current: false },
+    { name: 'Mis licencias', href: 'licenses', icon: DocumentTextIcon, current: false },
     { name: 'Perfil', href: 'perfil', icon: UsersIcon, current: false }
   ]
 
   const navigationHHRR = [
-    { name: 'Licencias', href: 'licenses', icon: HomeIcon, current: false },
+    { name: 'Licencias', href: 'licenses', icon: DocumentTextIcon, current: false },
+    { name: 'Agregar licencia', href: 'add-licenses', icon: DocumentTextIcon, current: false },
     { name: 'Perfil', href: 'perfil', icon: UsersIcon, current: false }
   ]
 

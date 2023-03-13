@@ -5,6 +5,7 @@ import {ContextProvider } from './context/Context';
 import Login from "./pages/Login";
 import Licenses from "./pages/Licenses";
 import Perfil from "./pages/Perfil";
+import AddLicenses from "./pages/AddLicenses";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route element={<PrivateRoutes />}>
               <Route element={<Licenses />} path="/licenses" />
               <Route element={<Perfil />} path="/perfil" />
+              <Route element={ <AddLicenses />} path="add-licenses" />
             </Route>
           </Routes>
         </ContextProvider>
