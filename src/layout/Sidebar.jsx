@@ -1,38 +1,96 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import {
-  Bars3Icon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  UsersIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
+import { Fragment, useState, useContext } from 'react';
+import Context from '../context/Context';
+import { Dialog, Transition } from '@headlessui/react';
 import { useNavigate } from 'react-router-dom';
 import classNames from '../utils/ClassNames';
+import { UsersIcon } from '../components/icons/UsersIcon';
+import { DocumentTextIcon } from '../components/icons/DocumentTextIcon';
+import { XMarkIcon } from '../components/icons/XMarkIcon';
+import { Bars3Icon } from '../components/icons/Bars3Icon';
 
 export default function Sidebar() {
 
-const navigate = useNavigate();
-  
+  const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const navigation = [
-    { name: 'Mis licencias', href: 'licenses', icon: HomeIcon, current: false },
-    { name: 'Perfil', href: 'perfil', icon: UsersIcon, current: false },
-    { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-    { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-    { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-    { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
+  const user = useContext(Context);
+
+  const navigationUser = [
+    { name: 'Mis licencias', href: 'licenses', icon: DocumentTextIcon, current: false },
+    { name: 'Perfil', href: 'perfil', icon: UsersIcon, current: false }
+  ]
+
+  const navigationHHRR = [
+    { name: 'Licencias', href: 'licenses', icon: DocumentTextIcon, current: false },
+    { name: 'Agregar licencia', href: 'add-licenses', icon: DocumentTextIcon, current: false },
+    { name: 'Perfil', href: 'perfil', icon: UsersIcon, current: false }
   ]
 
   const nav = (path) => {
     navigate(`/${path}`);
   }
-  return(
+
+  const renderList = () => {
+    if (user?.usuario?.tipo_rol === 'usuario') {
+      return (
+        <>
+          {navigationUser.map((item) => (
+            <a
+              key={item.name}
+              //href={item.href}
+              className={classNames(
+                item.current
+                  ? 'bg-gray-100 text-gray-900'
+                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                'group flex items-center rounded-md px-2 py-2 text-base font-medium'
+              )}
+              onClick={() => nav(item.href)}
+            >
+              <item.icon
+                className={classNames(
+                  item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                  'mr-4 h-6 w-6 flex-shrink-0'
+                )}
+                aria-hidden="true"
+              />
+              {item.name}
+            </a>
+          ))}
+        </>
+      )
+    } if (user?.usuario?.tipo_rol === 'rrhh') {
+      return (
+        <>
+          {navigationHHRR.map((item) => (
+            <a
+              key={item.name}
+              //href={item.href}
+              className={classNames(
+                item.current
+                  ? 'bg-gray-100 text-gray-900'
+                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                'group flex items-center rounded-md px-2 py-2 text-base font-medium'
+              )}
+              onClick={() => nav(item.href)}
+            >
+              <item.icon
+                className={classNames(
+                  item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                  'mr-4 h-6 w-6 flex-shrink-0'
+                )}
+                aria-hidden="true"
+              />
+              {item.name}
+            </a>
+          ))}
+        </>
+      )
+    } else {
+      return null
+    }
+  }
+  return (
     <>
-    <Transition.Root show={sidebarOpen} as={Fragment}>
+      <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setSidebarOpen}>
           <Transition.Child
             as={Fragment}
@@ -86,28 +144,8 @@ const navigate = useNavigate();
                     />
                   </div>
                   <nav className="mt-5 space-y-1 px-2">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        //href={item.href}
-                        className={classNames(
-                          item.current
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                          'group flex items-center rounded-md px-2 py-2 text-base font-medium'
-                        )}
-                        onClick={()=> nav(item.href)}
-                      >
-                        <item.icon
-                          className={classNames(
-                            item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                            'mr-4 h-6 w-6 flex-shrink-0'
-                          )}
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </a>
-                    ))}
+                    {renderList()}
+
                   </nav>
                 </div>
                 <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
@@ -147,25 +185,7 @@ const navigate = useNavigate();
               />
             </div>
             <nav className="mt-5 flex-1 space-y-1 bg-white px-2">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={classNames(
-                    item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                    'group flex items-center rounded-md px-2 py-2 text-sm font-medium'
-                  )}
-                >
-                  <item.icon
-                    className={classNames(
-                      item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                      'mr-3 h-6 w-6 flex-shrink-0'
-                    )}
-                    aria-hidden="true"
-                  />
-                  {item.name}
-                </a>
-              ))}
+             {renderList()}
             </nav>
           </div>
           <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
@@ -188,15 +208,15 @@ const navigate = useNavigate();
         </div>
       </div>
       <div className="sticky top-0 z-10 bg-white pl-1 pt-1 sm:pl-3 sm:pt-3 lg:hidden">
-          <button
-            type="button"
-            className="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-            onClick={() => setSidebarOpen(true)}
-          >
-            <span className="sr-only">Open sidebar</span>
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-          </button>
-        </div>
+        <button
+          type="button"
+          className="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+          onClick={() => setSidebarOpen(true)}
+        >
+          <span className="sr-only">Open sidebar</span>
+          <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+        </button>
+      </div>
     </>
   )
 }
