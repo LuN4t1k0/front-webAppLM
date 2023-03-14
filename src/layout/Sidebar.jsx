@@ -1,36 +1,50 @@
-import { Fragment, useState, useContext } from 'react';
-import Context from '../context/Context';
-import { Dialog, Transition } from '@headlessui/react';
-import { useNavigate } from 'react-router-dom';
-import classNames from '../utils/ClassNames';
-import { UsersIcon } from '../components/icons/UsersIcon';
-import { DocumentTextIcon } from '../components/icons/DocumentTextIcon';
-import { XMarkIcon } from '../components/icons/XMarkIcon';
-import { Bars3Icon } from '../components/icons/Bars3Icon';
+import { Fragment, useState, useContext, useEffect } from "react";
+import Context from "../context/Context";
+import { Dialog, Transition } from "@headlessui/react";
+import { useNavigate } from "react-router-dom";
+import classNames from "../utils/ClassNames";
+import { UsersIcon } from "../components/icons/UsersIcon";
+import { DocumentTextIcon } from "../components/icons/DocumentTextIcon";
+import { XMarkIcon } from "../components/icons/XMarkIcon";
+import { Bars3Icon } from "../components/icons/Bars3Icon";
 
 export default function Sidebar() {
-
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const user = useContext(Context);
 
   const navigationUser = [
-    { name: 'Mis licencias', href: 'licenses', icon: DocumentTextIcon, current: false },
-    { name: 'Perfil', href: 'perfil', icon: UsersIcon, current: false }
-  ]
+    {
+      name: "Mis licencias",
+      href: "licenses",
+      icon: DocumentTextIcon,
+      current: false,
+    },
+    { name: "Perfil", href: "perfil", icon: UsersIcon, current: false },
+  ];
 
   const navigationHHRR = [
-    { name: 'Licencias', href: 'licenses', icon: DocumentTextIcon, current: false },
-    { name: 'Agregar licencia', href: 'add-licenses', icon: DocumentTextIcon, current: false },
-    { name: 'Perfil', href: 'perfil', icon: UsersIcon, current: false }
-  ]
+    {
+      name: "Licencias",
+      href: "licenses",
+      icon: DocumentTextIcon,
+      current: false,
+    },
+    {
+      name: "Agregar licencia",
+      href: "add-licenses",
+      icon: DocumentTextIcon,
+      current: false,
+    },
+    { name: "Perfil", href: "perfil", icon: UsersIcon, current: false },
+  ];
 
   const nav = (path) => {
     navigate(`/${path}`);
-  }
+  };
 
   const renderList = () => {
-    if (user?.usuario?.tipo_rol === 'basico') {
+    if (user?.usuario?.tipo_rol === "basico") {
       return (
         <>
           {navigationUser.map((item) => (
@@ -39,16 +53,18 @@ export default function Sidebar() {
               //href={item.href}
               className={classNames(
                 item.current
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                'group flex items-center rounded-md px-2 py-2 text-base font-medium'
+                  ? "bg-gray-100 text-gray-900"
+                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                "group flex items-center rounded-md px-2 py-2 text-base font-medium"
               )}
               onClick={() => nav(item.href)}
             >
               <item.icon
                 className={classNames(
-                  item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                  'mr-4 h-6 w-6 flex-shrink-0'
+                  item.current
+                    ? "text-gray-500"
+                    : "text-gray-400 group-hover:text-gray-500",
+                  "mr-4 h-6 w-6 flex-shrink-0"
                 )}
                 aria-hidden="true"
               />
@@ -56,8 +72,9 @@ export default function Sidebar() {
             </a>
           ))}
         </>
-      )
-    } if (user?.usuario?.tipo_rol === 'rrhh') {
+      );
+    }
+    if (user?.usuario?.tipo_rol === "rrhh") {
       return (
         <>
           {navigationHHRR.map((item) => (
@@ -66,16 +83,18 @@ export default function Sidebar() {
               //href={item.href}
               className={classNames(
                 item.current
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                'group flex items-center rounded-md px-2 py-2 text-base font-medium'
+                  ? "bg-gray-100 text-gray-900"
+                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                "group flex items-center rounded-md px-2 py-2 text-base font-medium"
               )}
               onClick={() => nav(item.href)}
             >
               <item.icon
                 className={classNames(
-                  item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                  'mr-4 h-6 w-6 flex-shrink-0'
+                  item.current
+                    ? "text-gray-500"
+                    : "text-gray-400 group-hover:text-gray-500",
+                  "mr-4 h-6 w-6 flex-shrink-0"
                 )}
                 aria-hidden="true"
               />
@@ -83,15 +102,19 @@ export default function Sidebar() {
             </a>
           ))}
         </>
-      )
+      );
     } else {
-      return null
+      return null;
     }
-  }
+  };
   return (
     <>
       <Transition.Root show={sidebarOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-40 lg:hidden" onClose={setSidebarOpen}>
+        <Dialog
+          as="div"
+          className="relative z-40 lg:hidden"
+          onClose={setSidebarOpen}
+        >
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
@@ -131,7 +154,10 @@ export default function Sidebar() {
                       onClick={() => setSidebarOpen(false)}
                     >
                       <span className="sr-only">Close sidebar</span>
-                      <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                      <XMarkIcon
+                        className="h-6 w-6 text-white"
+                        aria-hidden="true"
+                      />
                     </button>
                   </div>
                 </Transition.Child>
@@ -143,10 +169,7 @@ export default function Sidebar() {
                       alt="Your Company"
                     />
                   </div>
-                  <nav className="mt-5 space-y-1 px-2">
-                    {renderList()}
-
-                  </nav>
+                  <nav className="mt-5 space-y-1 px-2">{renderList()}</nav>
                 </div>
                 <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
                   <a href="#" className="group block flex-shrink-0">
@@ -159,15 +182,21 @@ export default function Sidebar() {
                         />
                       </div>
                       <div className="ml-3">
-                        <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">Tom Cook</p>
-                        <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
+                        <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">
+                          Tom Cook
+                        </p>
+                        <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">
+                          View profile
+                        </p>
                       </div>
                     </div>
                   </a>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
-            <div className="w-14 flex-shrink-0">{/* Force sidebar to shrink to fit close icon */}</div>
+            <div className="w-14 flex-shrink-0">
+              {/* Force sidebar to shrink to fit close icon */}
+            </div>
           </div>
         </Dialog>
       </Transition.Root>
@@ -185,7 +214,7 @@ export default function Sidebar() {
               />
             </div>
             <nav className="mt-5 flex-1 space-y-1 bg-white px-2">
-             {renderList()}
+              {renderList()}
             </nav>
           </div>
           <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
@@ -199,9 +228,24 @@ export default function Sidebar() {
                   />
                 </div>
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">Tom Cook</p>
-                  <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
+                  <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                    Tom Cook
+                  </p>
+                  <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                    View profile
+                  </p>
                 </div>
+                <span class="ml-3 hidden sm:block">
+                  <button
+                    type="button"
+                    class="inline-flex items-center rounded-md bg-white px-3 py-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      navigate("/");
+                    }}
+                  >Cerrar sesión
+                  </button>
+                </span>
               </div>
             </a>
           </div>
@@ -218,5 +262,5 @@ export default function Sidebar() {
         </button>
       </div>
     </>
-  )
+  );
 }
