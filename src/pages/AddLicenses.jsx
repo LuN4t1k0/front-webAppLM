@@ -5,7 +5,7 @@ import FormLicense from "../components/FormLicense";
 
 
 export default function AddLicenses() {
-  const user = useContext(Context);
+  const {user} = useContext(Context);
 
   return (
     <>

@@ -1,112 +1,35 @@
-import { Fragment, useState, useContext, useEffect } from "react";
+import { Fragment, useState, useContext } from "react";
 import Context from "../context/Context";
 import { Dialog, Transition } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
-import classNames from "../utils/ClassNames";
-import { UsersIcon } from "../components/icons/UsersIcon";
-import { DocumentTextIcon } from "../components/icons/DocumentTextIcon";
 import { XMarkIcon } from "../components/icons/XMarkIcon";
 import { Bars3Icon } from "../components/icons/Bars3Icon";
+import UserNavigation from "../components/UserNavigation";
+import RrhhNavigation from "../components/RrhhNavigation";
 
 export default function Sidebar() {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const user = useContext(Context);
+  const {user} = useContext(Context);
 
-  const navigationUser = [
-    {
-      name: "Mis licencias",
-      href: "licenses",
-      icon: DocumentTextIcon,
-      current: false,
-    },
-    { name: "Perfil", href: "perfil", icon: UsersIcon, current: false },
-  ];
-
-  const navigationHHRR = [
-    {
-      name: "Licencias",
-      href: "licenses",
-      icon: DocumentTextIcon,
-      current: false,
-    },
-    {
-      name: "Agregar licencia",
-      href: "add-licenses",
-      icon: DocumentTextIcon,
-      current: false,
-    },
-    { name: "Perfil", href: "perfil", icon: UsersIcon, current: false },
-  ];
-
-  const nav = (path) => {
-    navigate(`/${path}`);
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   const renderList = () => {
-    if (user?.usuario?.tipo_rol === "basico") {
-      return (
-        <>
-          {navigationUser.map((item) => (
-            <a
-              key={item.name}
-              //href={item.href}
-              className={classNames(
-                item.current
-                  ? "bg-gray-100 text-gray-900"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                "group flex items-center rounded-md px-2 py-2 text-base font-medium"
-              )}
-              onClick={() => nav(item.href)}
-            >
-              <item.icon
-                className={classNames(
-                  item.current
-                    ? "text-gray-500"
-                    : "text-gray-400 group-hover:text-gray-500",
-                  "mr-4 h-6 w-6 flex-shrink-0"
-                )}
-                aria-hidden="true"
-              />
-              {item.name}
-            </a>
-          ))}
-        </>
-      );
-    }
-    if (user?.usuario?.tipo_rol === "rrhh") {
-      return (
-        <>
-          {navigationHHRR.map((item) => (
-            <a
-              key={item.name}
-              //href={item.href}
-              className={classNames(
-                item.current
-                  ? "bg-gray-100 text-gray-900"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                "group flex items-center rounded-md px-2 py-2 text-base font-medium"
-              )}
-              onClick={() => nav(item.href)}
-            >
-              <item.icon
-                className={classNames(
-                  item.current
-                    ? "text-gray-500"
-                    : "text-gray-400 group-hover:text-gray-500",
-                  "mr-4 h-6 w-6 flex-shrink-0"
-                )}
-                aria-hidden="true"
-              />
-              {item.name}
-            </a>
-          ))}
-        </>
-      );
-    } else {
-      return null;
+    switch (user?.usuario?.tipo_rol) {
+      case 'basico':
+        return (
+          <UserNavigation/>
+        );
+      case 'rrhh':
+        return (
+          <RrhhNavigation/>
+        );
     }
   };
+
   return (
     <>
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -162,87 +85,44 @@ export default function Sidebar() {
                   </div>
                 </Transition.Child>
                 <div className="h-0 flex-1 overflow-y-auto pt-5 pb-4">
-                  <div className="flex flex-shrink-0 items-center px-4">
-                    <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                      alt="Your Company"
-                    />
-                  </div>
                   <nav className="mt-5 space-y-1 px-2">{renderList()}</nav>
                 </div>
                 <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-                  <a href="#" className="group block flex-shrink-0">
-                    <div className="flex items-center">
-                      <div>
-                        <img
-                          className="inline-block h-10 w-10 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="ml-3">
-                        <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                          Tom Cook
-                        </p>
-                        <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">
-                          View profile
-                        </p>
-                      </div>
+                  <a href="#" className="group block w-full flex-shrink-0">
+                    <div className="flex items-center justify-center">
+                      <span className="ml-3 hidden sm:block">
+                        <button
+                          type="button"
+                          className="inline-flex justify-center items-center rounded-md bg-white px-3 py-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                          onClick={logout}
+                        >Cerrar sesión
+                        </button>
+                      </span>
                     </div>
                   </a>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
-            <div className="w-14 flex-shrink-0">
-              {/* Force sidebar to shrink to fit close icon */}
-            </div>
           </div>
         </Dialog>
       </Transition.Root>
 
       {/* Static sidebar for desktop */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
-        {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white">
           <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
-            <div className="flex flex-shrink-0 items-center px-4">
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt="Your Company"
-              />
-            </div>
             <nav className="mt-5 flex-1 space-y-1 bg-white px-2">
               {renderList()}
             </nav>
           </div>
           <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
             <a href="#" className="group block w-full flex-shrink-0">
-              <div className="flex items-center">
-                <div>
-                  <img
-                    className="inline-block h-9 w-9 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                </div>
-                <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                    Tom Cook
-                  </p>
-                  <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                    View profile
-                  </p>
-                </div>
-                <span class="ml-3 hidden sm:block">
+              <div className="flex items-center justify-center">
+                <span className="ml-3 hidden sm:block">
                   <button
                     type="button"
-                    class="inline-flex items-center rounded-md bg-white px-3 py-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    onClick={() => {
-                      localStorage.removeItem("token");
-                      navigate("/");
-                    }}
+                    className="inline-flex justify-center items-center rounded-md bg-white px-3 py-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    onClick={logout}
                   >Cerrar sesión
                   </button>
                 </span>
