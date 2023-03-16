@@ -4,7 +4,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import FormatDate from "../hooks/FormatDate";
 
 export default function Modal({ isOpen, closeModal, modalData }) {
-
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -21,7 +20,7 @@ export default function Modal({ isOpen, closeModal, modalData }) {
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div className="flex  min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -31,29 +30,140 @@ export default function Modal({ isOpen, closeModal, modalData }) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+              <Dialog.Panel className="relative transform  overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all ">
                 <div>
-                  <h1 className="font-semibold text-lg">Datos de la licencia</h1>
-                  <div className="">
-                    <p>Folio: {modalData?.folio}</p>
-                    <p>Rut empresa: {modalData?.rut_empresa}</p>
-                    <p>Rut trabajador:{modalData?.rut_trabajador}</p>
-                    <p>Fecha emisión: {FormatDate(modalData?.fecha_emision)}</p>
-                    <p>Fecha de inicio: {FormatDate(modalData?.fecha_inicio)}</p>
-                    <p>Cantidad de días: {modalData?.cantidad_dias}</p>
-                    <p>Tipo de Licencia: {modalData?.tipo_licencia}</p>
-                    <p>Tipo de reposo: {modalData?.tipo_reposo}</p>
-                    <p>Lugar de reposo: {modalData?.lugar_reposo}</p>
-                    <p>Institución: {modalData?.institucion?.nombre}</p>
-                    <p>Rut profesional: {modalData?.rut_profesional}</p>
-                    <p>Especialidad: {modalData?.especialidad?.nombre}</p>
-                    <p>Estado: {modalData?.estado}</p>
+                  <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+                    <div class="px-4 py-3 sm:px-6">
+                      <h3 class="text-base font-semibold leading-6 text-gray-900">
+                        Datos de la licencia
+                      </h3>
+                    </div>
+                    <div class="border-t border-gray-200">
+                      <dl class="grid grid-cols-3">
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt class="text-sm font-medium text-gray-500">
+                            Folio:
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {modalData?.folio}
+                          </dd>
+                        </div>
+
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt class="text-sm font-medium text-gray-500">
+                            Rut empresa:
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {modalData?.rut_empresa}
+                          </dd>
+                        </div>
+
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt class="text-sm font-medium text-gray-500">
+                            Rut trabajador:
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {modalData?.rut_trabajador}
+                          </dd>
+                        </div>
+
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt class="text-sm font-medium text-gray-500">
+                            Fecha emisión:
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {FormatDate(modalData?.fecha_emision)}
+                          </dd>
+                        </div>
+
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt class="text-sm font-medium text-gray-500">
+                            Fecha de inicio:
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {FormatDate(modalData?.fecha_inicio)}
+                          </dd>
+                        </div>
+
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt class="text-sm font-medium text-gray-500">
+                            Cantidad de días:
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {modalData?.cantidad_dias}
+                          </dd>
+                        </div>
+
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt class="text-sm font-medium text-gray-500">
+                            Tipo de Licencia:
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {modalData?.tipo_licencia}
+                          </dd>
+                        </div>
+
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt class="text-sm font-medium text-gray-500">
+                            Tipo de reposo:
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {modalData?.tipo_reposo}
+                          </dd>
+                        </div>
+
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt class="text-sm font-medium text-gray-500">
+                            Lugar de reposo:
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {modalData?.lugar_reposo}
+                          </dd>
+                        </div>
+
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt class="text-sm font-medium text-gray-500">
+                            Institución:
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {modalData?.institucion?.nombre}
+                          </dd>
+                        </div>
+
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt class="text-sm font-medium text-gray-500">
+                            Rut profesional:
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {modalData?.rut_profesional}
+                          </dd>
+                        </div>
+
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt class="text-sm font-medium text-gray-500">
+                            Especialidad:
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {modalData?.especialidad?.nombre}
+                          </dd>
+                        </div>
+
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt class="text-sm font-medium text-gray-500">
+                            Estado:
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {modalData?.estado}
+                          </dd>
+                        </div>
+                      </dl>
+                    </div>
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-6 flex justify-end">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     onClick={closeModal}
                   >
                     Cerrar
