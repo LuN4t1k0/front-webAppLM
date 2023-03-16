@@ -4,7 +4,7 @@ import Modal from "./Modal";
 import FormatDate from "../hooks/FormatDate";
 
 export default function UserTable() {
-  const user = useContext(Context);
+  const {user} = useContext(Context);
   const [isOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null)
 

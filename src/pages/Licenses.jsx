@@ -6,7 +6,7 @@ import RrhhUserTable from "../components/RrhhUserTable";
 
 
 export default function Licenses() {
-  const user = useContext(Context);
+  const {user} = useContext(Context);
 
   const renderTitle = () => {
     switch (user?.usuario?.tipo_rol) {
