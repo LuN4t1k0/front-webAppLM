@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 export default function Perfil() {
-  const user = useContext(Context);
+  const {user} = useContext(Context);
 
   const schema = yup.object({
     nombre: yup.string(),
@@ -23,7 +23,7 @@ export default function Perfil() {
   });
 
   const onSubmit = (data) => {
-    console.log(data)
+    console.log({...data})
   };
 
   return (
@@ -59,7 +59,7 @@ export default function Perfil() {
                     
                     defaultValue={user?.email}
                     {...register("email")}
-                    className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
 
@@ -75,7 +75,6 @@ export default function Perfil() {
                     className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200"
                   />
                 </div>
-
                 <div className="col-span-6 sm:col-span-3">
                   <label htmlFor="telefono" className="block text-sm font-medium leading-6 text-gray-900">
                     Teléfono
