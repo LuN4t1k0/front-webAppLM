@@ -90,7 +90,7 @@ export default function Sidebar() {
                 <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
                   <a href="#" className="group block w-full flex-shrink-0">
                     <div className="flex items-center justify-center">
-                      <span className="ml-3 hidden sm:block">
+                      <span className="ml-3">
                         <button
                           type="button"
                           className="inline-flex justify-center items-center rounded-md bg-white px-3 py-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
