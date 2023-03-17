@@ -35,6 +35,7 @@ export default function FormLicense() {
   };
 
   const addNewlicense = async (payload) => {
+    console.log(payload);
     try {
       if (payload) {
         //const res = await axios.post("url", payload);
@@ -54,6 +55,61 @@ export default function FormLicense() {
       console.log(error);
     }
   }
+
+  const tipoLicencia = [
+    { key: 1, value: "Enfermedad o accidente común" },
+    { key: 2, value: "Medicina preventiva" },
+    { key: 3, value: "Pre y postnatal" },
+    { key: 4, value: "Enfermedad grave del niño menor del año" },
+    { key: 5, value: "Accidente del trabajo o del trayecto" },
+    { key: 6, value: "Enfermedad profesional" },
+    { key: 7, value: "Patologías del embarazo" },
+  ];
+
+  const tipoReposo = [
+    { key: 1, value: "Parcial" },
+    { key: 2, value: "Total" }
+  ];
+
+  const estado = [
+    { key: 1, value: "Pendiente" },
+    { key: 2, value: "Aprobada" },
+    { key: 3, value: "Reducida" },
+    { key: 4, value: "Rechazada" }
+  ];
+
+  const EspecialistasMedicos = [
+    { key: 1, value: 'Médico General de Zona' },
+    { key: 2, value: 'Médico General de Atención Primaria' },
+    { key: 3, value: 'Médico Familiar' },
+    { key: 4, value: 'Médico Internista' },
+    { key: 5, value: 'Médico Pediatra' },
+    { key: 6, value: 'Médico Ginecólogo' },
+    { key: 7, value: 'Médico Cirujano' },
+    { key: 8, value: 'Médico Traumatólogo' },
+    { key: 9, value: 'Médico Psiquiatra' },
+    { key: 10, value: 'Médico Oftalmólogo' },
+    { key: 11, value: 'Médico Otorrinolaringólogo' },
+    { key: 12, value: 'Médico Neurólogo' },
+    { key: 13, value: 'Médico Cardiólogo' },
+    { key: 14, value: 'Médico Dermatólogo' },
+    { key: 15, value: 'Médico Geriatra' },
+    { key: 16, value: 'Médico Infectólogo' },
+    { key: 17, value: 'Médico Broncopulmonar' },
+    { key: 18, value: 'Médico Nefrólogo' },
+    { key: 19, value: 'Médico Reumatólogo' },
+    { key: 20, value: 'Médico Hematólogo' },
+    { key: 21, value: 'Médico Oncólogo' },
+    { key: 23, value: 'Médico Radiólogo' },
+    { key: 24, value: 'Médico Anestesiólogo' },
+    { key: 25, value: 'Médico Urgenciólogo' },
+    { key: 26, value: 'Médico Rehabilitador' },
+    { key: 27, value: 'Médico Medicina Física y Rehabilitación' },
+    { key: 28, value: 'Médico Nutriólogo' },
+    { key: 29, value: 'Médico Epidemiólogo' },
+    { key: 30, value: 'Médico Salubrista' },
+    { key: 31, value: 'Médico del Trabajo' },
+  ];
 
   return (
     <>
@@ -169,12 +225,13 @@ export default function FormLicense() {
               Tipo de licencia
             </label>
             <div className="mt-2">
-              <input
-                {...register("tipo_licencia", { required: true })}
-                type="text"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder=""
-              />
+              <select {...register("tipo_licencia", {required:true})} className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                {tipoLicencia.map((tipo) => {
+                  return (
+                    <option key={tipo.key} value={tipo.value}>{tipo.value}</option>
+                  )
+                })}
+              </select>
               {errors.tipo_licencia && <span>Este campo es obligatorio</span>}
             </div>
           </div>
@@ -184,12 +241,13 @@ export default function FormLicense() {
               Tipo de reposo
             </label>
             <div className="mt-2">
-              <input
-                {...register("tipo_reposo", { required: true })}
-                type="text"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder=""
-              />
+              <select  {...register("tipo_reposo", { required: true })} className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                {tipoReposo.map((tipo) => {
+                  return (
+                    <option key={tipo.key} value={tipo.value}>{tipo.value}</option>
+                  )
+                })}
+              </select>
               {errors.tipo_reposo && <span>Este campo es obligatorio</span>}
             </div>
           </div>
@@ -244,12 +302,13 @@ export default function FormLicense() {
               Especialidad
             </label>
             <div className="mt-2">
-              <input
-                {...register("especialidad", { required: true })}
-                type="text"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder=""
-              />
+              <select {...register("especialidad", { required: true })} className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                {EspecialistasMedicos.map((tipo) => {
+                  return (
+                    <option key={tipo.key} value={tipo.value}>{tipo.value}</option>
+                  )
+                })}
+              </select>
               {errors.especialidad && <span>Este campo es obligatorio</span>}
             </div>
           </div>
@@ -259,12 +318,13 @@ export default function FormLicense() {
               Estado
             </label>
             <div className="mt-2">
-              <input
-                {...register("estado", { required: true })}
-                type="text"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder=""
-              />
+              <select {...register("estado", { required: true })} className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                {estado.map((tipo) => {
+                  return (
+                    <option key={tipo.key} value={tipo.value}>{tipo.value}</option>
+                  )
+                })}
+              </select>
               {errors.estado && <span>Este campo es obligatorio</span>}
             </div>
           </div>
