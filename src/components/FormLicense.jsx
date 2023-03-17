@@ -85,7 +85,7 @@ export default function FormLicense() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder=""
               />
-              {errors.folio && <span>This field is required</span>}
+              {errors.folio && <span>Este campo es obligatorio</span>}
             </div>
           </div>
 
@@ -100,7 +100,7 @@ export default function FormLicense() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder=""
               />
-              {errors.rut_empresa && <span>This field is required</span>}
+              {errors.rut_empresa && <span>Este campo es obligatorio</span>}
             </div>
           </div>
 
@@ -115,7 +115,7 @@ export default function FormLicense() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder=""
               />
-              {errors.rut_trabajador && <span>This field is required</span>}
+              {errors.rut_trabajador && <span>Este campo es obligatorio</span>}
             </div>
           </div>
 
@@ -130,7 +130,7 @@ export default function FormLicense() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder=""
               />
-              {errors.fecha_emision && <span>This field is required</span>}
+              {errors.fecha_emision && <span>Este campo es obligatorio</span>}
             </div>
           </div>
 
@@ -145,7 +145,7 @@ export default function FormLicense() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder=""
               />
-              {errors.fecha_inicio && <span>This field is required</span>}
+              {errors.fecha_inicio && <span>Este campo es obligatorio</span>}
             </div>
           </div>
 
@@ -160,7 +160,7 @@ export default function FormLicense() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder=""
               />
-              {errors.cantidad_dias && <span>This field is required</span>}
+              {errors.cantidad_dias && <span>Este campo es obligatorio</span>}
             </div>
           </div>
 
@@ -175,7 +175,7 @@ export default function FormLicense() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder=""
               />
-              {errors.tipo_licencia && <span>This field is required</span>}
+              {errors.tipo_licencia && <span>Este campo es obligatorio</span>}
             </div>
           </div>
 
@@ -190,7 +190,7 @@ export default function FormLicense() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder=""
               />
-              {errors.tipo_reposo && <span>This field is required</span>}
+              {errors.tipo_reposo && <span>Este campo es obligatorio</span>}
             </div>
           </div>
 
@@ -205,7 +205,7 @@ export default function FormLicense() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder=""
               />
-              {errors.lugar_reposo && <span>This field is required</span>}
+              {errors.lugar_reposo && <span>Este campo es obligatorio</span>}
             </div>
           </div>
 
@@ -220,7 +220,7 @@ export default function FormLicense() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder=""
               />
-              {errors.institucion && <span>This field is required</span>}
+              {errors.institucion && <span>Este campo es obligatorio</span>}
             </div>
           </div>
 
@@ -235,7 +235,7 @@ export default function FormLicense() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder=""
               />
-              {errors.rut_profesional && <span>This field is required</span>}
+              {errors.rut_profesional && <span>Este campo es obligatorio</span>}
             </div>
           </div>
 
@@ -250,7 +250,7 @@ export default function FormLicense() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder=""
               />
-              {errors.especialidad && <span>This field is required</span>}
+              {errors.especialidad && <span>Este campo es obligatorio</span>}
             </div>
           </div>
 
@@ -265,7 +265,7 @@ export default function FormLicense() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder=""
               />
-              {errors.estado && <span>This field is required</span>}
+              {errors.estado && <span>Este campo es obligatorio</span>}
             </div>
           </div>
 
