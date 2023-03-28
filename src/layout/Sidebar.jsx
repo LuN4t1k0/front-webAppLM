@@ -10,7 +10,7 @@ import RrhhNavigation from "../components/RrhhNavigation";
 export default function Sidebar() {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const {user} = useContext(Context);
+  const { rol } = useContext(Context);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -18,8 +18,8 @@ export default function Sidebar() {
   };
 
   const renderList = () => {
-    switch (user?.usuario?.tipo_rol) {
-      case 'basico':
+    switch (rol) {
+      case 'cliente':
         return (
           <UserNavigation/>
         );

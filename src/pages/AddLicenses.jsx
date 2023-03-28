@@ -5,11 +5,11 @@ import FormLicense from "../components/FormLicense";
 
 
 export default function AddLicenses() {
-  const {user} = useContext(Context);
+  const {rol} = useContext(Context);
 
   return (
     <>
-      {user?.usuario?.tipo_rol === 'rrhh' ? (
+      {rol === 'rrhh' ? (
         <>
         <div className="py-6">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
