@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import Context from "../context/Context";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 export const FormUser = () => {
   const schema = yup.object({
-    rut: yup.string()
+    email: yup.string()
       .required()
-      .matches(/^(\d{2}\.\d{3}\.\d{3}-)([a-zA-Z]{1}$|\d{1}$)/, 'No es el formato'),
-    password:yup.string().required()
+      .email(),
+    password: yup.string().required()
   }).required();
 
   const {
@@ -20,16 +22,19 @@ export const FormUser = () => {
     resolver: yupResolver(schema)
   });
   const navigate = useNavigate();
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
-  
   const onSubmit = (data) => {
     login(data)
   };
 
-  const login = (data) => {
-    if(data.rut === '11.111.111-1' && data.password === "123456"){
-      localStorage.setItem("token", token);
+  const login = async (payload) => {
+    const urlBack = "https://previleyapp-production.up.railway.app/api/v1";
+    const loginEndpoint = "/auth/login";
+    try {
+      const {data} = await axios.post(urlBack + loginEndpoint, payload);
+      localStorage.setItem("token", data.token);
       navigate('/licenses');
+    } catch ({ response: { data: message } }) {
+      alert("Error al iniciar sesión 🙁");
     }
   }
 
@@ -47,16 +52,16 @@ export const FormUser = () => {
           >
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 text-left">
-                Rut
+                Email
               </label>
               <div className="mt-2">
                 <input
-                  {...register("rut", { required: true })}
-                  placeholder="Ejemplo 11.111.111-1"
+                  {...register("email", { required: true })}
+                  placeholder="correo@correo.cl"
                   className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-              { errors.rut && (
+              {errors.email && (
                 <p className="mt-2 text-sm text-red-400 text-left font-medium" >
                   Este campo es requerido
                 </p>
@@ -70,10 +75,10 @@ export const FormUser = () => {
                 <input
                   {...register("password", { required: true })}
                   placeholder="Ingresa tu contraseña"
-                 type= "password" className="block w-full rounded-md border-0 py-1.5 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  type="password" className="block w-full rounded-md border-0 py-1.5 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-              { errors.password && (
+              {errors.password && (
                 <p className="mt-2 text-sm text-red-400 text-left font-medium" >
                   Este campo es requerido
                 </p>
