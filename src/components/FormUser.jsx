@@ -5,8 +5,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import jwt from 'jwt-decode';
 
 export const FormUser = () => {
+  const { setUser, setRol } = useContext(Context);
   const schema = yup.object({
     email: yup.string()
       .required()
@@ -23,21 +25,27 @@ export const FormUser = () => {
   });
   const navigate = useNavigate();
   const onSubmit = (data) => {
-    login(data)
+     login(data);
   };
 
   const login = async (payload) => {
-    const urlBack = "https://previleyapp-production.up.railway.app/api/v1";
     const loginEndpoint = "/auth/login";
     try {
-      const {data} = await axios.post(urlBack + loginEndpoint, payload);
+      const { data } = await axios.post(import.meta.env.VITE_BASE_URL + loginEndpoint, payload);
       localStorage.setItem("token", data.token);
+      const tokenObject = jwt(data.token);
+      setRol(tokenObject.role);
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/empleados/${tokenObject.rut}`, {
+        headers: {Authorization: "Bearer " + data.token}
+      });
+      const info  = await res.data;
+      setUser(info);
       navigate('/licenses');
     } catch ({ response: { data: message } }) {
       alert("Error al iniciar sesión 🙁");
     }
   }
-
+  
   return (
     <div className="flex min-h-full h-screen flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">

@@ -7,28 +7,9 @@ const Context = createContext(null);
 const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [rol, setRol] = useState('');
-  
-  async function getInfo() {
-    const token = localStorage.getItem("token");
-    const tokenObject = jwt(token);
-    setRol(tokenObject.role);
-    try {
-      const res = await axios.get(`https://previleyapp-production.up.railway.app/api/v1/empleados/${tokenObject.rut}`, {
-        headers: {Authorization: "Bearer " + token}
-      });
-      const { data } = await res;
-      setUser(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  
-  useEffect(() => {
-    getInfo();
-  }, []);
 
   return (
-    <Context.Provider value={{user, setUser, rol}} >
+    <Context.Provider value={{user, setUser, rol, setRol}} >
         {children}
     </Context.Provider>
   );
