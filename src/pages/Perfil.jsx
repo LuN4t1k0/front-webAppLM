@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 export default function Perfil() {
-  const {user} = useContext(Context);
+  const { user } = useContext(Context);
 
   const schema = yup.object({
     nombre: yup.string(),

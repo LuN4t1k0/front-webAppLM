@@ -11,6 +11,7 @@ export default function RrhhUserTable() {
   const [isOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
   const { search, setSearch } = UseFetch();
+
   function closeModal() {
     setIsOpen(false);
   }
@@ -91,27 +92,27 @@ export default function RrhhUserTable() {
                     Estado
                   </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                    <span className="sr-only">Edit</span>
+                    
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {user?.licencias?.map((licencia) => (
+                {user?.licenciasMedicas?.map((licencia) => (
                   <tr key={licencia.id}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                       {licencia.folio}
                     </td>
                     <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 sm:table-cell">
-                      {licencia.tipo_licencia}
+                      {licencia.tipoLicencia}
                     </td>
                     <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                      {FormatDate(licencia.fecha_inicio)}
+                      {FormatDate(licencia.fechaInicio)}
                     </td>
                     <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                      {FormatDate(licencia.fecha_termino)}
+                      {FormatDate(licencia.fechaTermino)}
                     </td>
                     <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                      {licencia.cantidad_dias}
+                      {licencia.cantidadDias}
                     </td>
 
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

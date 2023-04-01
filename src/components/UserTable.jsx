@@ -4,9 +4,11 @@ import Modal from "./Modal";
 import FormatDate from "../hooks/FormatDate";
 
 export default function UserTable() {
-  const {user} = useContext(Context);
+  const { user } = useContext(Context);
   const [isOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null)
+
+  console.log(user);
 
   function closeModal() {
     setIsOpen(false);
@@ -28,12 +30,6 @@ export default function UserTable() {
                   className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                 >
                   Folio
-                </th>
-                <th
-                  scope="col"
-                  className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
-                >
-                  Tipo de licencia
                 </th>
                 <th
                   scope="col"
@@ -65,22 +61,19 @@ export default function UserTable() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
-              {user?.licencias?.map((licencia) => (
-                <tr key={licencia.id}>
+              {user?.licenciasMedicas?.map((licencia, index) => (
+                <tr key={index}>
                   <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                     {licencia.folio}
                   </td>
-                  <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 sm:table-cell">
-                    {licencia.tipo_licencia}
+                  <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
+                    {FormatDate(licencia.fechaInicio)}
                   </td>
                   <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                    {FormatDate(licencia.fecha_inicio)}
+                    {FormatDate(licencia.fechaTermino)}
                   </td>
                   <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                    {FormatDate(licencia.fecha_termino)}
-                  </td>
-                  <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                    {licencia.cantidad_dias}
+                    {licencia.cantidadDias}
                   </td>
 
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

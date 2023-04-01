@@ -54,7 +54,7 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                             Rut empresa:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.rut_empresa}
+                            {modalData?.rutEmpresa}
                           </dd>
                         </div>
 
@@ -63,7 +63,7 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                             Rut trabajador:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.rut_trabajador}
+                            {modalData?.rutEmpleado}
                           </dd>
                         </div>
 
@@ -72,7 +72,7 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                             Fecha emisión:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {FormatDate(modalData?.fecha_emision)}
+                            {FormatDate(modalData?.fechaEmision)}
                           </dd>
                         </div>
 
@@ -81,7 +81,7 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                             Fecha de inicio:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {FormatDate(modalData?.fecha_inicio)}
+                            {FormatDate(modalData?.fechaInicio)}
                           </dd>
                         </div>
 
@@ -90,7 +90,8 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                             Cantidad de días:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.cantidad_dias}
+                            {modalData?.cantidadDias
+}
                           </dd>
                         </div>
 
@@ -99,7 +100,7 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                             Tipo de Licencia:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.tipo_licencia}
+                            {modalData?.tipoLicencia}
                           </dd>
                         </div>
 
@@ -108,7 +109,7 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                             Tipo de reposo:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.tipo_reposo}
+                            {modalData?.tipoReposo}
                           </dd>
                         </div>
 
@@ -117,7 +118,7 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                             Lugar de reposo:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.lugar_reposo}
+                            {modalData?.lugarReposo}
                           </dd>
                         </div>
 
@@ -135,7 +136,7 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                             Rut profesional:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.rut_profesional}
+                            {modalData?.rutProfesional}
                           </dd>
                         </div>
 
