@@ -111,6 +111,16 @@ export default function FormLicense() {
     { key: 31, value: 'Médico del Trabajo' },
   ];
 
+  const institucion = [
+    {key:1, value:'banmedica'},
+    {key:2, value:'colmena'},
+    {key:3, value:'consalud'},
+    {key:4, value:'cruzblanca'},
+    {key:5, value:'masvida'},
+    {key:6, value:'vidatres'},
+    {key:7, value:'fonasa'},  
+  ]
+
   return (
     <>
       <ToastContainer
@@ -272,12 +282,13 @@ export default function FormLicense() {
               Institución
             </label>
             <div className="mt-2">
-              <input
-                {...register("institucion", { required: true })}
-                type="text"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder=""
-              />
+              <select {...register("institucion", { required: true })} className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                {institucion.map((tipo) => {
+                  return (
+                    <option key={tipo.key} value={tipo.value}>{tipo.value}</option>
+                  )
+                })}
+              </select>
               {errors.institucion && <span>Este campo es obligatorio</span>}
             </div>
           </div>
