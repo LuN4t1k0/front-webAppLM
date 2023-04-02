@@ -20,6 +20,12 @@ export default function RrhhNavigation() {
       icon: DocumentPlusIcon,
       current: false,
     },
+    {
+      name: "Agregar licencia",
+      href: "add-licenses",
+      icon: DocumentPlusIcon,
+      current: false,
+    },
     { name: "Perfil", href: "perfil", icon: UsersIcon, current: false },
   ];
 
