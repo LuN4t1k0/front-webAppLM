@@ -8,11 +8,14 @@ export default function Perfil() {
   const { user } = useContext(Context);
 
   const schema = yup.object({
-    nombre: yup.string(),
-    rut: yup.string(),
-    telefono:yup.string().required(),
-    email:yup.string().required()
-  }).required();
+    /* nombre: yup.string(),
+    rut: yup.string(), */
+    telefono:yup.string().optional(),
+    email:yup.string().optional(),
+    direccion:yup.string().optional()
+  });
+
+  console.log(user)
 
   const {
     register,
@@ -23,8 +26,24 @@ export default function Perfil() {
   });
 
   const onSubmit = (data) => {
-    console.log({...data})
+    console.log(data)
+    updateInfo(data);
   };
+
+const updateInfo = async(data) => {
+  try {
+    const token = localStorage.getItem('token');
+  
+ const res =   await axios.patch(`${import.meta.env.VITE_BASE_UR}/empleados/${user.rut}`,data,{
+      headers:{Autorization: "Bearer " + token}
+
+    });
+    console.log("hola",res)
+  }
+  catch (err) {
+
+  }
+  }
 
   return (
     <div className="py-6">
@@ -56,7 +75,7 @@ export default function Perfil() {
                   </label>
                   <input
                     
-                    defaultValue={user?.email}
+                    defaultValue={user?.usuario.email}
                     {...register("email")}
                     className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -85,6 +104,18 @@ export default function Perfil() {
                   />
                 </div>
                 
+                <div className="col-span-6 sm:col-span-3">
+                  <label htmlFor="telefono" className="block text-sm font-medium leading-6 text-gray-900">
+                    Dirección
+                  </label>
+                  <input
+                    type="text"
+                    defaultValue={user?.direccion}
+                    {...register('direccion')}
+                    className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+
               </div>
             </div>
             <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
