@@ -1,30 +1,26 @@
 import axios from "axios";
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
+import jwt from 'jwt-decode';
 
 const Context = createContext(null);
 
 const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  
-  async function getInfo() {
-    const token = localStorage.getItem("token");
-    try {
-      const res = await axios.get("https://run.mocky.io/v3/b9d69ed6-9eba-45bd-acf9-89e565f808a8", {
-        headers: {Authorization: "Bearer" + token}
+  const [rol, setRol] = useState('');
+
+  const getUserInfo = async () => {
+    const token = localStorage.getItem('token');
+    const tokenObject = jwt(token);
+      setRol(tokenObject.role);
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/empleados/${tokenObject.rut}`, {
+        headers: {Authorization: "Bearer " + token}
       });
-      const { data } = await res;
-      setUser(data);
-    } catch (error) {
-      console.log(error);
-    }
+      const info  = await res.data;
+      setUser(info);
   }
 
-  useEffect(() => {
-    getInfo();
-  }, []);
-
   return (
-    <Context.Provider value={{user, setUser}} >
+    <Context.Provider value={{user, setUser, rol, setRol, getUserInfo}} >
         {children}
     </Context.Provider>
   );

@@ -41,7 +41,7 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                     <div className="border-t border-gray-200">
                       <dl className="grid grid-cols-1 text-center lg:grid-cols-3">
                         <div className= "bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt className="text-sm font-medium text-gray-500">
+                          <dt className="text-sm font-semibold text-gray-500">
                             Folio:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -50,106 +50,115 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                         </div>
 
                         <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt className="text-sm font-medium text-gray-500">
+                          <dt className="text-sm font-semibold text-gray-500">
                             Rut empresa:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.rut_empresa}
+                            {modalData?.rutEmpresa}
                           </dd>
                         </div>
 
                         <div className= "bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt className="text-sm font-medium text-gray-500">
+                          <dt className="text-sm font-semibold text-gray-500">
                             Rut trabajador:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.rut_trabajador}
+                            {modalData?.rutEmpleado}
                           </dd>
                         </div>
 
                         <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt className="text-sm font-medium text-gray-500">
+                          <dt className="text-sm font-semibold text-gray-500">
                             Fecha emisión:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {FormatDate(modalData?.fecha_emision)}
+                            {FormatDate(modalData?.fechaEmision)}
                           </dd>
                         </div>
 
                         <div className= "bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt className="text-sm font-medium text-gray-500">
+                          <dt className="text-sm font-semibold text-gray-500">
                             Fecha de inicio:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {FormatDate(modalData?.fecha_inicio)}
+                            {FormatDate(modalData?.fechaInicio)}
+                          </dd>
+                        </div>
+
+                        <div className= "bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <dt className="text-sm font-semibold text-gray-500">
+                            Fecha de termino:
+                          </dt>
+                          <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {FormatDate(modalData?.fechaTermino)}
                           </dd>
                         </div>
 
                         <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt className="text-sm font-medium text-gray-500">
+                          <dt className="text-sm font-semibold text-gray-500">
                             Cantidad de días:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.cantidad_dias}
+                            {modalData?.cantidadDias}
                           </dd>
                         </div>
 
                         <div className= "bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt className="text-sm font-medium text-gray-500">
+                          <dt className="text-sm font-semibold text-gray-500">
                             Tipo de Licencia:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.tipo_licencia}
+                            {modalData?.tipoLicencia}
                           </dd>
                         </div>
 
                         <div className= "bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt className="text-sm font-medium text-gray-500">
+                          <dt className="text-sm font-semibold text-gray-500">
                             Tipo de reposo:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.tipo_reposo}
+                            {modalData?.tipoReposo}
                           </dd>
                         </div>
 
                         <div className= "bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt className="text-sm font-medium text-gray-500">
+                          <dt className="text-sm font-semibold text-gray-500">
                             Lugar de reposo:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.lugar_reposo}
+                            {modalData?.lugarReposo}
                           </dd>
                         </div>
 
                         <div className= "bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt className="text-sm font-medium text-gray-500">
+                          <dt className="text-sm font-semibold text-gray-500">
                             Institución:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.institucion?.nombre}
+                            {modalData?.institucion}
                           </dd>
                         </div>
 
                         <div className= "bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt className="text-sm font-medium text-gray-500">
+                          <dt className="text-sm font-semibold text-gray-500">
                             Rut profesional:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.rut_profesional}
+                            {modalData?.rutProfesional}
                           </dd>
                         </div>
 
                         <div className= "bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt className="text-sm font-medium text-gray-500">
+                          <dt className="text-sm font-semibold text-gray-500">
                             Especialidad:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {modalData?.especialidad?.nombre}
+                            {modalData?.especialidad}
                           </dd>
                         </div>
 
                         <div className= "bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt className="text-sm font-medium text-gray-500">
+                          <dt className="text-sm font-semibold text-gray-500">
                             Estado:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
