@@ -8,7 +8,7 @@ import axios from "axios";
 import jwt from 'jwt-decode';
 
 export const FormUser = () => {
-  const { setUser, setRol } = useContext(Context);
+  const { setUser, setRol, getUserInfo } = useContext(Context);
   const schema = yup.object({
     email: yup.string()
       .required()
@@ -33,13 +33,7 @@ export const FormUser = () => {
     try {
       const { data } = await axios.post(import.meta.env.VITE_BASE_URL + loginEndpoint, payload);
       localStorage.setItem("token", data.token);
-      const tokenObject = jwt(data.token);
-      setRol(tokenObject.role);
-      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/empleados/${tokenObject.rut}`, {
-        headers: {Authorization: "Bearer " + data.token}
-      });
-      const info  = await res.data;
-      setUser(info);
+      getUserInfo();
       navigate('/licenses');
     } catch ({ response: { data: message } }) {
       alert("Error al iniciar sesión 🙁");

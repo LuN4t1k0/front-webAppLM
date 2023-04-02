@@ -1,4 +1,5 @@
 import 'react-toastify/dist/ReactToastify.css';
+import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -27,17 +28,18 @@ export default function FormLicense() {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(schema)
   });
 
-  const onSubmit = (data) => {
-    addNewlicense(data)
-  };
+  const [submittedData, setSubmittedData] = useState({});
 
+  const onSubmit = (data) => {
+    addNewlicense(data);
+  };
+  
   const addNewlicense = async (payload) => {
-    console.log(payload);
     try {
       if (payload) {
         const token = localStorage.getItem('token');
@@ -57,7 +59,6 @@ export default function FormLicense() {
           });
         }
       }
-
     } catch (error) {
       toast.error('Error al agregar licencia', {
         position: "top-center",
