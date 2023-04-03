@@ -31,6 +31,7 @@ export default function Perfil() {
     if(payload) {
       const newPayload = {
         telefono: payload.telefono,
+        direccion:payload.direccion,
         usuario: {
           email: payload.email,
         }
