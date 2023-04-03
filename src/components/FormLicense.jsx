@@ -367,7 +367,7 @@ export default function FormLicense() {
               {errors.estado && <span>Este campo es obligatorio</span>}
             </div>
           </div>
-
+          <div></div>
           <div className="flex justify-end mt-5">
             <button
               type="submit"
