@@ -1,7 +1,7 @@
 import React from "react";
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import FormatDate from "../hooks/FormatDate";
+//import FormatDate from "../hooks/FormatDate";
 
 export default function Modal({ isOpen, closeModal, modalData }) {
   return (
@@ -72,7 +72,7 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                             Fecha emisión:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {FormatDate(modalData?.fechaEmision)}
+                            {modalData?.fechaEmision}
                           </dd>
                         </div>
 
@@ -81,7 +81,7 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                             Fecha de inicio:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {FormatDate(modalData?.fechaInicio)}
+                            {modalData?.fechaInicio}
                           </dd>
                         </div>
 
@@ -90,7 +90,7 @@ export default function Modal({ isOpen, closeModal, modalData }) {
                             Fecha de termino:
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            {FormatDate(modalData?.fechaTermino)}
+                            {modalData?.fechaTermino}
                           </dd>
                         </div>
 
