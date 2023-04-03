@@ -5,10 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import jwt from 'jwt-decode';
 
 export const FormUser = () => {
-  const { setUser, setRol, getUserInfo } = useContext(Context);
+  const { getUserInfo } = useContext(Context);
   const schema = yup.object({
     email: yup.string()
       .required()

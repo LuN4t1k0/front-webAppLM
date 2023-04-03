@@ -1,5 +1,4 @@
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -33,20 +32,18 @@ export default function FormLicense() {
     resolver: yupResolver(schema)
   });
 
-  const [submittedData, setSubmittedData] = useState({});
-
   const onSubmit = (data) => {
     addNewlicense(data);
   };
-  
+
   const addNewlicense = async (payload) => {
     try {
       if (payload) {
         const token = localStorage.getItem('token');
         const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/licenciasMedicas`, payload, {
-          headers: {Authorization: "Bearer " + token}
+          headers: { Authorization: "Bearer " + token }
         });
-        if(res.status === 201) {
+        if (res.status === 201) {
           toast.success('Licencia agregada con exito', {
             position: "top-center",
             autoClose: 1000,
@@ -130,13 +127,13 @@ export default function FormLicense() {
   ];
 
   const institucion = [
-    {key:1, value:'banmedica'},
-    {key:2, value:'colmena'},
-    {key:3, value:'consalud'},
-    {key:4, value:'cruzblanca'},
-    {key:5, value:'masvida'},
-    {key:6, value:'vidatres'},
-    {key:7, value:'fonasa'},  
+    { key: 1, value: 'banmedica' },
+    { key: 2, value: 'colmena' },
+    { key: 3, value: 'consalud' },
+    { key: 4, value: 'cruzblanca' },
+    { key: 5, value: 'masvida' },
+    { key: 6, value: 'vidatres' },
+    { key: 7, value: 'fonasa' },
   ]
 
   return (
@@ -182,7 +179,7 @@ export default function FormLicense() {
                 {...register("rutEmpresa", { required: true })}
                 type='text'
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder=""
+                placeholder="Ej: 11111111-1"
               />
               {errors.rutEmpresa && <span>Este campo es obligatorio</span>}
             </div>
@@ -197,7 +194,7 @@ export default function FormLicense() {
                 {...register("rutEmpleado", { required: true })}
                 type="text"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder=""
+                placeholder="Ej: 11111111-1"
               />
               {errors.rutEmpleado && <span>Este campo es obligatorio</span>}
             </div>
@@ -210,9 +207,9 @@ export default function FormLicense() {
             <div className="mt-2">
               <input
                 {...register("fechaEmision", { required: true })}
-                type="text"
+                type="date"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder=""
+                placeholder="Ej: 2023-03-15"
               />
               {errors.fechaEmision && <span>Este campo es obligatorio</span>}
             </div>
@@ -225,28 +222,13 @@ export default function FormLicense() {
             <div className="mt-2">
               <input
                 {...register("fechaInicio", { required: true })}
-                type="text"
+                type="date"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder=""
+                placeholder="Ej: 2023-03-16"
               />
               {errors.fechaInicio && <span>Este campo es obligatorio</span>}
             </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium leading-6 text-gray-900">
-              Fecha de termino
-            </label>
-            <div className="mt-2">
-              <input
-                {...register("fechaTermino", { required: true })}
-                type="text"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder=""
-              />
-              {errors.fechaTermino && <span>Este campo es obligatorio</span>}
-            </div>
-          </div>
-
           <div>
             <label className="block text-sm font-medium leading-6 text-gray-900">
               Cantidad de días
@@ -261,13 +243,27 @@ export default function FormLicense() {
               {errors.cantidadDias && <span>Este campo es obligatorio</span>}
             </div>
           </div>
+          <div>
+            <label className="block text-sm font-medium leading-6 text-gray-900">
+              Fecha de termino
+            </label>
+            <div className="mt-2">
+              <input
+                {...register("fechaTermino", { required: true })}
+                type="date"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                placeholder="Ej: 2023-03-18"
+              />
+              {errors.fechaTermino && <span>Este campo es obligatorio</span>}
+            </div>
+          </div>
 
           <div>
             <label className="block text-sm font-medium leading-6 text-gray-900">
               Tipo de licencia
             </label>
             <div className="mt-2">
-              <select {...register("tipoLicencia", {required:true})} className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <select {...register("tipoLicencia", { required: true })} className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 {tipoLicencia.map((tipo) => {
                   return (
                     <option key={tipo.key} value={tipo.value}>{tipo.value}</option>
@@ -334,7 +330,7 @@ export default function FormLicense() {
                 {...register("rutProfesional", { required: true })}
                 type="text"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder=""
+                placeholder="Ej: 11111111-1"
               />
               {errors.rutProfesional && <span>Este campo es obligatorio</span>}
             </div>
