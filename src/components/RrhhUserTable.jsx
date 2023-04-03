@@ -2,15 +2,15 @@ import { useState, useContext } from "react";
 import Context from "../context/Context";
 import Modal from "./Modal";
 import FormatDate from "../hooks/FormatDate";
-import { MagnifyingGlassIcon } from "../components/icons/MagnifyingGlassIcon";
-import UseFetch from "../hooks/useFetch";
+//import { MagnifyingGlassIcon } from "../components/icons/MagnifyingGlassIcon";
+//import UseFetch from "../hooks/useFetch";
 
 
 export default function RrhhUserTable() {
   const {user} = useContext(Context);
   const [isOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
-  const { search, setSearch } = UseFetch();
+  //const { search, setSearch } = UseFetch();
 
   function closeModal() {
     setIsOpen(false);
@@ -29,7 +29,7 @@ export default function RrhhUserTable() {
 
   return (
     <>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-6">
+{/*       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-6">
         <div className="px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="-mx-4 sm:-mx-0 min-w-[320px] ">
             <label htmlFor="account-number" className="block text-sm font-medium leading-6 text-gray-900">
@@ -48,7 +48,7 @@ export default function RrhhUserTable() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="-mx-4 mt-8 sm:-mx-0">
