@@ -106,10 +106,10 @@ export default function RrhhUserTable() {
                       {licencia.tipoLicencia}
                     </td>
                     <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                      {FormatDate(licencia.fechaInicio)}
+                      {licencia.fechaInicio}
                     </td>
                     <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                      {FormatDate(licencia.fechaTermino)}
+                      {licencia.fechaTermino}
                     </td>
                     <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
                       {licencia.cantidadDias}

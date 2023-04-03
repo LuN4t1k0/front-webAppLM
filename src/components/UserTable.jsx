@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import Context from "../context/Context";
 import Modal from "./Modal";
-import FormatDate from "../hooks/FormatDate";
+//import FormatDate from "../hooks/FormatDate";
 
 export default function UserTable() {
   const { user } = useContext(Context);
@@ -67,10 +67,10 @@ export default function UserTable() {
                     {licencia.folio}
                   </td>
                   <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                    {FormatDate(licencia.fechaInicio)}
+                    {licencia.fechaInicio}
                   </td>
                   <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                    {FormatDate(licencia.fechaTermino)}
+                    {licencia.fechaTermino}
                   </td>
                   <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
                     {licencia.cantidadDias}
