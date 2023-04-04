@@ -7,11 +7,13 @@ const Context = createContext(null);
 const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [rol, setRol] = useState('');
+  const [rutEmpresa, setRutEmpresa] = useState('');
 
   const getUserInfo = async () => {
     const token = localStorage.getItem('token');
     const tokenObject = jwt(token);
     setRol(tokenObject.role);
+    setRutEmpresa(tokenObject.rutEmpresa);
     if (tokenObject.role === 'cliente') {
       const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/empleados/${tokenObject.rut}`, {
         headers: { Authorization: "Bearer " + token }
@@ -30,7 +32,7 @@ const ContextProvider = ({ children }) => {
   }
 
   return (
-    <Context.Provider value={{ user, setUser, rol, setRol, getUserInfo }} >
+    <Context.Provider value={{ user, setUser, rol, setRol, getUserInfo, rutEmpresa }} >
       {children}
     </Context.Provider>
   );

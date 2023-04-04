@@ -4,12 +4,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import axios from 'axios';
+import { useContext } from "react";
+import Context from "../context/Context";
 
 export default function FormLicense() {
-
+  const { rutEmpresa } = useContext(Context);
+  
   const schema = yup.object({
     folio: yup.string().required(),
-    rutEmpresa: yup.string().required(),
     rutEmpleado: yup.string().required(),
     fechaEmision: yup.string().required(),
     fechaInicio: yup.string().required(),
@@ -33,7 +35,12 @@ export default function FormLicense() {
   });
 
   const onSubmit = (data) => {
-    addNewlicense(data);
+    const payload = {
+      ...data,
+      rutEmpresa: rutEmpresa
+    }
+
+    addNewlicense(payload);
   };
 
   const addNewlicense = async (payload) => {
@@ -176,9 +183,10 @@ export default function FormLicense() {
             </label>
             <div className="mt-2">
               <input
-                {...register("rutEmpresa", { required: true })}
+                defaultValue={rutEmpresa}
                 type='text'
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                disabled
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200"
                 placeholder="Ej: 11111111-1"
               />
               {errors.rutEmpresa && <span>Este campo es obligatorio</span>}
