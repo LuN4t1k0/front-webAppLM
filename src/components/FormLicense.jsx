@@ -6,9 +6,11 @@ import * as yup from "yup";
 import axios from 'axios';
 import { useContext } from "react";
 import Context from "../context/Context";
+import { useNavigate } from 'react-router-dom';
 
 export default function FormLicense() {
-  const { rutEmpresa } = useContext(Context);
+  const { rutEmpresa, getUserInfo } = useContext(Context);
+  const navigate = useNavigate();
   
   const schema = yup.object({
     folio: yup.string().required(),
@@ -51,6 +53,7 @@ export default function FormLicense() {
           headers: { Authorization: "Bearer " + token }
         });
         if (res.status === 201) {
+          getUserInfo();
           toast.success('Licencia agregada con exito', {
             position: "top-center",
             autoClose: 1000,
@@ -61,6 +64,9 @@ export default function FormLicense() {
             progress: undefined,
             theme: "light",
           });
+          setTimeout(() => {
+           navigate('/licenses');
+          }, 2000);
         }
       }
     } catch (error) {
