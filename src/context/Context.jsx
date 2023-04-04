@@ -8,6 +8,7 @@ const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [rol, setRol] = useState('');
   const [rutEmpresa, setRutEmpresa] = useState('');
+  const [rrhh, setRrhh] = useState({});
 
   const getUserInfo = async () => {
     const token = localStorage.getItem('token');
@@ -25,6 +26,11 @@ const ContextProvider = ({ children }) => {
         headers: { Authorization: "Bearer " + token }
       });
       const rrhhInfo = await response.data;
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/empleados/${tokenObject.rut}`, {
+        headers: { Authorization: "Bearer " + token }
+      });
+      const info = await res.data;
+      setRrhh(info);
       setUser(rrhhInfo);
     } else {
       console.log('else');
@@ -32,7 +38,7 @@ const ContextProvider = ({ children }) => {
   }
 
   return (
-    <Context.Provider value={{ user, setUser, rol, setRol, getUserInfo, rutEmpresa }} >
+    <Context.Provider value={{ user, setUser, rol, setRol, getUserInfo, rutEmpresa, rrhh }} >
       {children}
     </Context.Provider>
   );
