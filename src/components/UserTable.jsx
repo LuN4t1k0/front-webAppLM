@@ -8,8 +8,6 @@ export default function UserTable() {
   const [isOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null)
 
-  console.log(user);
-
   function closeModal() {
     setIsOpen(false);
   }

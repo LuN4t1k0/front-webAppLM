@@ -11,17 +11,27 @@ const ContextProvider = ({ children }) => {
   const getUserInfo = async () => {
     const token = localStorage.getItem('token');
     const tokenObject = jwt(token);
-      setRol(tokenObject.role);
+    setRol(tokenObject.role);
+    if (tokenObject.role === 'cliente') {
       const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/empleados/${tokenObject.rut}`, {
-        headers: {Authorization: "Bearer " + token}
+        headers: { Authorization: "Bearer " + token }
       });
-      const info  = await res.data;
+      const info = await res.data;
       setUser(info);
+    } if (tokenObject.role === 'rrhh') {
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/empresas/${tokenObject.rutEmpresa}`, {
+        headers: { Authorization: "Bearer " + token }
+      });
+      const rrhhInfo = await response.data;
+      setUser(rrhhInfo);
+    } else {
+      console.log('else');
+    }
   }
 
   return (
-    <Context.Provider value={{user, setUser, rol, setRol, getUserInfo}} >
-        {children}
+    <Context.Provider value={{ user, setUser, rol, setRol, getUserInfo }} >
+      {children}
     </Context.Provider>
   );
 };

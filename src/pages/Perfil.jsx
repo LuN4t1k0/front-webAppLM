@@ -38,7 +38,6 @@ export default function Perfil() {
       }
       try {
         const token = localStorage.getItem('token');
-        console.log(token);
         const res = await axios.patch(`${import.meta.env.VITE_BASE_URL}/empleados/${user.rut}`, newPayload, {
           headers: {Authorization: "Bearer " + token}
         });
